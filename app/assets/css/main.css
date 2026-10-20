@@ -1,0 +1,290 @@
+﻿@import 'tailwindcss';
+
+/* حالت شب بر پایهٔ کلاس dark روی <html> فعال می‌شود (نه prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Estedad', 'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-200: #99f6e4;
+  --color-primary-300: #5eead4;
+  --color-primary-400: #2dd4bf;
+  --color-primary-500: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-primary-700: #0f766e;
+  --color-primary-800: #115e59;
+  --color-primary-900: #134e4a;
+  --color-primary-950: #042f2e;
+
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes dialog-enter {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+[role='dialog'],
+[role='alertdialog'] {
+  animation: dialog-enter 180ms ease-out both;
+}
+
+.faq-item > .faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item[open] > .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-content {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-0.35rem);
+  transition: opacity 220ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item[open] .faq-answer-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.support-chat-panel {
+  width: min(22rem, calc(100vw - 2rem));
+  height: min(32rem, calc(100dvh - 11rem));
+}
+
+article {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+article:hover {
+  transform: translateY(-2px);
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* In Persian RTL controls, keep the label on the right and its icon on the left. */
+:dir(rtl) :is(button, a):has(> svg):not(.rtl-icon-leading):not(.rtl-icon-trailing) {
+  flex-direction: row-reverse;
+}
+
+button:active:not(:disabled),
+a:active {
+  transform: scale(0.98);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input::placeholder,
+textarea::placeholder {
+  text-align: right;
+}
+
+input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not([type='reset']),
+select,
+textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 0.85rem;
+  background-color: #f9fbfb;
+  color: #111827;
+  font: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not([type='reset']),
+select {
+  min-height: 2.85rem;
+}
+
+select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  cursor: pointer;
+}
+
+.admin-dashboard select {
+  padding-right: 0.75rem;
+  padding-left: 2.5rem;
+  background-position: left 0.8rem center;
+}
+
+input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not([type='reset']):hover,
+select:hover,
+textarea:hover {
+  border-color: #99c9c4;
+  background-color: #ffffff;
+}
+
+input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not([type='reset']):focus,
+select:focus,
+textarea:focus {
+  border-color: #0f9b90;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(13 148 136 / 13%), 0 4px 12px rgb(15 118 110 / 7%);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.dark input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not([type='reset']),
+.dark select,
+.dark textarea {
+  border-color: #374151;
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.dark select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.dark input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not([type='reset']):hover,
+.dark select:hover,
+.dark textarea:hover {
+  border-color: #5eead4;
+  background-color: #0b1220;
+}
+
+.dark input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not([type='reset']):focus,
+.dark select:focus,
+.dark textarea:focus {
+  border-color: #2dd4bf;
+  background-color: #030712;
+  color: #f9fafb;
+  box-shadow: 0 0 0 4px rgb(45 212 191 / 14%), 0 4px 12px rgb(0 0 0 / 18%);
+}
+
+.dark select option {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f9fafb;
+  box-shadow: 0 0 0 1000px #111827 inset;
+  transition: background-color 9999s ease-out 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  input,
+  select,
+  textarea {
+    transition: none;
+  }
+}
+
+/* پس‌زمینه و متن پایه تا قبل از رندر کامپوننت‌ها هم با تم هماهنگ باشد */
+body {
+  background-color: #ffffff;
+  color: #111827;
+}
+
+.dark body {
+  background-color: #030712;
+  color: #f9fafb;
+}
+
+/* جبران هدر چسبان هنگام پرش به لنگرها */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* پنهان کردن اسکرول‌بار در کاروسل‌های موبایل */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Leaflet keeps its controls and markers outside the tile pane, so only the map tiles are color-adjusted. */
+.clinic-map--dark .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(92%) contrast(88%);
+}
+
+.clinic-map--dark .leaflet-control-attribution,
+.clinic-map--dark .leaflet-control-zoom a {
+  background: #111827;
+  color: #d1d5db;
+}
+
+.clinic-map--dark .leaflet-control-attribution a {
+  color: #5eead4;
+}
+
+.clinic-map--dark .leaflet-control-zoom a {
+  border-color: #374151;
+}
+
+.clinic-map--dark .leaflet-popup-content-wrapper,
+.clinic-map--dark .leaflet-popup-tip {
+  background: #111827;
+  color: #f9fafb;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+
+  [role='dialog'],
+  [role='alertdialog'] {
+    animation: none;
+  }
+
+  article:hover,
+  button:active:not(:disabled),
+  a:active {
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
